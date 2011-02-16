@@ -10,7 +10,7 @@
 package quizgame.server;
 
 import java.util.Map;
-import quizgame.protocol.admin.PulpitAnswer;
+import quizgame.protocol.pulpit.PulpitAnswer;
 import quizgame.protocol.pulpit.PulpitPacket;
 import quizgame.protocol.pulpit.PulpitStatus;
 import quizgame.server.usertypes.PulpitAccount;

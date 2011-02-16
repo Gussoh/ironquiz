@@ -22,6 +22,7 @@ import java.util.TimerTask;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import quizgame.common.Category;
 import quizgame.common.Entry;
@@ -107,14 +108,21 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         
         questionsPanel.removeAll();
         
-        questionsPanel.setLayout(new GridLayout(maxNQuestions, activeBoard.getCategories().length));
-        
+        questionsPanel.setLayout(new GridLayout(maxNQuestions + 1, activeBoard.getCategories().length));
+
+        // Add category titles
+        for(int j = 0; j < activeBoard.getCategories().length; j++) {
+        	JLabel categoryName = new JLabel(activeBoard.getCategories()[j].name);
+        	categoryName.setHorizontalAlignment(SwingConstants.CENTER);
+        	questionsPanel.add(categoryName);
+        }
+
         buttonToCategoryAndQuestionMap = new HashMap<JButton, Entry<Integer, Integer>>();
         for(int i = 0; i < maxNQuestions; i++) {
             for(int j = 0; j < activeBoard.getCategories().length; j++) {
                 if(i < activeBoard.getCategories()[j].questions.length) {
 
-                    JButton b = new JButton(activeBoard.getCategories()[j].questions[i].score + ": " + activeBoard.getCategories()[j].questions[i].question);
+                    JButton b = new JButton(activeBoard.getCategories()[j].questions[i].score + "");
                     buttonToCategoryAndQuestionMap.put(b, new Entry(j, i));
                     b.addActionListener(this);
                     

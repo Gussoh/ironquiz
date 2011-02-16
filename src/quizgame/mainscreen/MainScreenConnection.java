@@ -55,13 +55,11 @@ public class MainScreenConnection extends ClientConnection {
                     mainScreenPanel.setNoCurrentQuestion();
                 } else if(object instanceof PlaySound) {
 
-                    System.out.println("KUKHWLVETE");
-                    
                     PlaySound playSound = (PlaySound)object;
                     
                     if (!SoundPlayer.getInstance().isLoaded(playSound.getSound())) {
-                        String thisDirectory = new File(".").getAbsolutePath();
-                        SoundPlayer.getInstance().loadSound(thisDirectory + playSound.getSound(), playSound.getSound());
+                        //String thisDirectory = new File(".").getAbsolutePath();
+                        SoundPlayer.getInstance().loadSound(playSound.getSound(), playSound.getSound());
                     }
                     
                     SoundPlayer.getInstance().play(playSound.getSound());
