@@ -249,7 +249,7 @@ public class GameBoardManager {
                             String[] answers = new String[splittedQuestion.length - 2];
                             
                             for (int i = 0; i < answers.length; i++) {
-                                answers[i] = splittedQuestion[i + 2];
+                                answers[i] = splittedQuestion[i + 2].trim();
                             }
                             
                             question.answers = answers;
