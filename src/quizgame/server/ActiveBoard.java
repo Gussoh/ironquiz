@@ -46,6 +46,9 @@ public class ActiveBoard implements AdminPacket {
         this.server = server;
         this.name = name;
         if(categories == null) {
+            Logger.getInstance().println("ActiveBoard: An empty board has been set as active board.");
+            server.getMainscreenModel().sendActiveBoard(inGameCategories);
+            inGameCategories = null;
             return;
         }
         

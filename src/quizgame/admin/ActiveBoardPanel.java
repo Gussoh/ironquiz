@@ -100,13 +100,21 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
             deactivateQuestion();
         }
         
+        questionsPanel.removeAll();
+        
+        
+        if (activeBoard.getCategories() == null) { // set empty board
+            validate();
+            return;
+        }
+        
         int maxNQuestions = 0;
         for (Category c : activeBoard.getCategories()) {
             if(maxNQuestions < c.questions.length)
                 maxNQuestions = c.questions.length;
         }
         
-        questionsPanel.removeAll();
+        
         
         questionsPanel.setLayout(new GridLayout(maxNQuestions + 1, activeBoard.getCategories().length));
 
@@ -271,28 +279,29 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         activeBoardMenu = new javax.swing.JPopupMenu();
         jToggleButton1 = new javax.swing.JToggleButton();
         markedQuestionPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        activateButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         selectedQuestionLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         selectedAnswer = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         selectedPoints = new javax.swing.JLabel();
-        activateButton = new javax.swing.JButton();
-        selectedUsed = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        selectedUsed = new javax.swing.JCheckBox();
         activeQuestionPanel = new javax.swing.JPanel();
-        activeQuestionQuestionLabel = new javax.swing.JLabel();
-        activeQuestionAnswerLabel = new javax.swing.JLabel();
-        activeQuestionPointsLabel = new javax.swing.JLabel();
-        labelForTimer = new javax.swing.JLabel();
-        timerLabel = new javax.swing.JLabel();
-        endButton = new javax.swing.JButton();
-        playButton = new javax.swing.JButton();
-        timerSlider = new javax.swing.JSlider();
         deactivateButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        endButton = new javax.swing.JButton();
         pauseButton = new javax.swing.JButton();
+        playButton = new javax.swing.JButton();
         changeTimerButton = new javax.swing.JButton();
-        pulpitsPanel = new javax.swing.JPanel();
+        timerSlider = new javax.swing.JSlider();
+        timerLabel = new javax.swing.JLabel();
+        labelForTimer = new javax.swing.JLabel();
+        activeQuestionPointsLabel = new javax.swing.JLabel();
+        activeQuestionAnswerLabel = new javax.swing.JLabel();
+        activeQuestionQuestionLabel = new javax.swing.JLabel();
         messagePanel = new javax.swing.JPanel();
         messageScroll = new javax.swing.JScrollPane();
         messageArea = new javax.swing.JTextArea();
@@ -301,23 +310,15 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         pulpitAnswerWrongButton = new javax.swing.JButton();
         pulpetAnswerInfoLabel = new javax.swing.JLabel();
         questionsPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pulpitsPanel = new javax.swing.JPanel();
 
         jToggleButton1.setText("jToggleButton1");
 
         markedQuestionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Selected Question"));
 
-        jLabel1.setText("Question: ");
-
-        selectedQuestionLabel.setText("(none selected)");
-
-        jLabel2.setText("Answer:");
-
-        selectedAnswer.setText("(none selected)");
-
-        jLabel3.setText("Points:");
-
-        selectedPoints.setText("(none selected)");
-
+        activateButton.setMnemonic('a');
         activateButton.setText("Activate");
         activateButton.setEnabled(false);
         activateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -325,6 +326,20 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                 activateButtonActionPerformed(evt);
             }
         });
+
+        selectedQuestionLabel.setText("(none selected)");
+
+        jLabel1.setText("Question: ");
+
+        jLabel2.setText("Answer:");
+
+        selectedAnswer.setText("(none selected)");
+
+        selectedPoints.setText("(none selected)");
+
+        jLabel3.setText("Points:");
+
+        jLabel8.setText("Used:");
 
         selectedUsed.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         selectedUsed.setEnabled(false);
@@ -336,87 +351,83 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
             }
         });
 
-        jLabel8.setText("Used:");
+        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel2Layout.createSequentialGroup()
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel3)
+                    .add(jLabel2)
+                    .add(jLabel1)
+                    .add(jLabel8))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel2Layout.createSequentialGroup()
+                        .add(selectedUsed)
+                        .add(474, 474, 474))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedPoints, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedAnswer, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedQuestionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+                        .add(138, 138, 138)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel2Layout.createSequentialGroup()
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(selectedQuestionLabel)
+                    .add(jLabel1))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(selectedAnswer)
+                    .add(jLabel2))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel3)
+                    .add(selectedPoints))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(selectedUsed)
+                    .add(jLabel8)))
+        );
 
         org.jdesktop.layout.GroupLayout markedQuestionPanelLayout = new org.jdesktop.layout.GroupLayout(markedQuestionPanel);
         markedQuestionPanel.setLayout(markedQuestionPanelLayout);
         markedQuestionPanelLayout.setHorizontalGroup(
             markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(markedQuestionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel3)
-                    .add(jLabel2)
-                    .add(jLabel1)
-                    .add(jLabel8))
+                .add(activateButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 89, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(selectedUsed)
-                    .add(markedQuestionPanelLayout.createSequentialGroup()
-                        .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(selectedPoints, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-                            .add(selectedAnswer, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, selectedQuestionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(activateButton)))
+                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 390, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         markedQuestionPanelLayout.setVerticalGroup(
             markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(markedQuestionPanelLayout.createSequentialGroup()
-                .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(activateButton)
-                    .add(selectedQuestionLabel)
-                    .add(jLabel1))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(selectedAnswer)
-                    .add(jLabel2))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel3)
-                    .add(selectedPoints))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(selectedUsed)
-                    .add(jLabel8))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .add(markedQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, activateButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         activeQuestionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Active Question"));
 
-        activeQuestionQuestionLabel.setText("Question:");
-
-        activeQuestionAnswerLabel.setText("Answer:");
-
-        activeQuestionPointsLabel.setText("Points:");
-
-        labelForTimer.setText("Time:");
-
-        timerLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        timerLabel.setText("0 / 0 ms");
-
-        endButton.setText("End");
-        endButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endButtonActionPerformed(evt);
-            }
-        });
-
-        playButton.setText("Play");
-        playButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playButtonActionPerformed(evt);
-            }
-        });
-
-        timerSlider.setEnabled(false);
-
+        deactivateButton.setMnemonic('d');
         deactivateButton.setText("De-activate");
         deactivateButton.setEnabled(false);
         deactivateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deactivateButtonActionPerformed(evt);
+            }
+        });
+
+        endButton.setText("End");
+        endButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endButtonActionPerformed(evt);
             }
         });
 
@@ -427,6 +438,15 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
             }
         });
 
+        playButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        playButton.setMnemonic('p');
+        playButton.setText("Play");
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+
         changeTimerButton.setText("Change timer...");
         changeTimerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -434,78 +454,91 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
             }
         });
 
-        org.jdesktop.layout.GroupLayout activeQuestionPanelLayout = new org.jdesktop.layout.GroupLayout(activeQuestionPanel);
-        activeQuestionPanel.setLayout(activeQuestionPanelLayout);
-        activeQuestionPanelLayout.setHorizontalGroup(
-            activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(activeQuestionPanelLayout.createSequentialGroup()
+        timerSlider.setEnabled(false);
+
+        timerLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        timerLabel.setText("0 / 0 ms");
+
+        labelForTimer.setText("Time:");
+
+        activeQuestionPointsLabel.setText("Points:");
+
+        activeQuestionAnswerLabel.setText("Answer:");
+
+        activeQuestionQuestionLabel.setText("Question:");
+
+        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(activeQuestionPanelLayout.createSequentialGroup()
-                        .add(activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(activeQuestionPanelLayout.createSequentialGroup()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel3Layout.createSequentialGroup()
                                 .add(labelForTimer)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(timerLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .add(changeTimerButton))
-                        .add(0, 0, 0)
-                        .add(activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(activeQuestionPanelLayout.createSequentialGroup()
+                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel3Layout.createSequentialGroup()
                                 .add(6, 6, 6)
                                 .add(playButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 78, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(pauseButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 86, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(endButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
-                            .add(activeQuestionPanelLayout.createSequentialGroup()
-                                .add(5, 5, 5)
-                                .add(timerSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)))
-                        .add(132, 132, 132)
-                        .add(deactivateButton))
+                                .add(endButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                            .add(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(timerSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))))
                     .add(activeQuestionPointsLabel)
                     .add(activeQuestionQuestionLabel)
                     .add(activeQuestionAnswerLabel))
                 .addContainerGap())
         );
-        activeQuestionPanelLayout.setVerticalGroup(
-            activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(activeQuestionPanelLayout.createSequentialGroup()
-                .add(activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(activeQuestionPanelLayout.createSequentialGroup()
-                        .add(activeQuestionQuestionLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(activeQuestionAnswerLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(activeQuestionPointsLabel)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(labelForTimer)
-                            .add(timerLabel)))
-                    .add(activeQuestionPanelLayout.createSequentialGroup()
-                        .add(62, 62, 62)
-                        .add(timerSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 17, Short.MAX_VALUE)
-                .add(activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, deactivateButton)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(changeTimerButton)
-                        .add(playButton)
-                        .add(pauseButton)
-                        .add(endButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(activeQuestionQuestionLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(activeQuestionAnswerLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(activeQuestionPointsLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(labelForTimer)
+                        .add(timerLabel))
+                    .add(timerSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 19, Short.MAX_VALUE)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(changeTimerButton)
+                    .add(playButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 46, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(pauseButton)
+                    .add(endButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        pulpitsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pulpet info"));
-
-        org.jdesktop.layout.GroupLayout pulpitsPanelLayout = new org.jdesktop.layout.GroupLayout(pulpitsPanel);
-        pulpitsPanel.setLayout(pulpitsPanelLayout);
-        pulpitsPanelLayout.setHorizontalGroup(
-            pulpitsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 211, Short.MAX_VALUE)
+        org.jdesktop.layout.GroupLayout activeQuestionPanelLayout = new org.jdesktop.layout.GroupLayout(activeQuestionPanel);
+        activeQuestionPanel.setLayout(activeQuestionPanelLayout);
+        activeQuestionPanelLayout.setHorizontalGroup(
+            activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(activeQuestionPanelLayout.createSequentialGroup()
+                .add(2, 2, 2)
+                .add(deactivateButton)
+                .add(18, 18, 18)
+                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
-        pulpitsPanelLayout.setVerticalGroup(
-            pulpitsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 335, Short.MAX_VALUE)
+        activeQuestionPanelLayout.setVerticalGroup(
+            activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, activeQuestionPanelLayout.createSequentialGroup()
+                .add(activeQuestionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(deactivateButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Messages"));
@@ -520,7 +553,7 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         messagePanelLayout.setHorizontalGroup(
             messagePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(messagePanelLayout.createSequentialGroup()
-                .add(messageScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .add(messageScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
                 .addContainerGap())
         );
         messagePanelLayout.setVerticalGroup(
@@ -530,8 +563,9 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                 .addContainerGap())
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Pulpet answer")));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Pulpit answer")));
 
+        pulpitAnswerCorrectButton.setMnemonic('c');
         pulpitAnswerCorrectButton.setText("Correct");
         pulpitAnswerCorrectButton.setEnabled(false);
         pulpitAnswerCorrectButton.addActionListener(new java.awt.event.ActionListener() {
@@ -540,6 +574,7 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
             }
         });
 
+        pulpitAnswerWrongButton.setMnemonic('w');
         pulpitAnswerWrongButton.setText("Wrong");
         pulpitAnswerWrongButton.setEnabled(false);
         pulpitAnswerWrongButton.addActionListener(new java.awt.event.ActionListener() {
@@ -558,20 +593,19 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                 .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel1Layout.createSequentialGroup()
-                        .add(pulpitAnswerCorrectButton)
+                        .add(pulpitAnswerCorrectButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
-                    .add(pulpetAnswerInfoLabel))
-                .addContainerGap())
+                        .add(pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(pulpetAnswerInfoLabel)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(pulpetAnswerInfoLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, pulpitAnswerCorrectButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, pulpitAnswerCorrectButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -581,12 +615,33 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         questionsPanel.setLayout(questionsPanelLayout);
         questionsPanelLayout.setHorizontalGroup(
             questionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 822, Short.MAX_VALUE)
+            .add(0, 681, Short.MAX_VALUE)
         );
         questionsPanelLayout.setVerticalGroup(
             questionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 183, Short.MAX_VALUE)
         );
+
+        jScrollPane2.setBorder(null);
+
+        jScrollPane1.setBorder(null);
+
+        pulpitsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Pulpit info"));
+
+        org.jdesktop.layout.GroupLayout pulpitsPanelLayout = new org.jdesktop.layout.GroupLayout(pulpitsPanel);
+        pulpitsPanel.setLayout(pulpitsPanelLayout);
+        pulpitsPanelLayout.setHorizontalGroup(
+            pulpitsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 504, Short.MAX_VALUE)
+        );
+        pulpitsPanelLayout.setVerticalGroup(
+            pulpitsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 495, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(pulpitsPanel);
+
+        jScrollPane2.setViewportView(jScrollPane1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -597,14 +652,14 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(questionsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(activeQuestionPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, messagePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+                            .add(activeQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(pulpitsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .add(jScrollPane2, 0, 0, Short.MAX_VALUE)
+                            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .add(messagePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -612,19 +667,18 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(questionsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(activeQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(activeQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 101, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(messagePanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-                        .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(pulpitsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(messagePanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -705,6 +759,10 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel labelForTimer;
     private javax.swing.JPanel markedQuestionPanel;

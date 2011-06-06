@@ -13,18 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeSet;
 import quizgame.admin.SortedArrays;
 import quizgame.common.Category;
-import quizgame.common.InGameCategory;
-import quizgame.common.InGameQuestion;
 import quizgame.common.Question;
 import quizgame.protocol.admin.boardediting.BoardAdded;
 import quizgame.protocol.admin.boardediting.BoardsRemoved;
 import quizgame.protocol.admin.boardediting.SetBoardName;
-import quizgame.protocol.mainscreen.SetQuestionUsedUp;
 
 /**
  *  A new approach to GameBoard managing.
@@ -207,6 +203,10 @@ public class GameBoardManager {
     }
     
     public Category[] getBoard(String name) {
+        
+        if (name == null) { // set empty board
+            return null;
+        }
         
         File boardFile = new File(boardDirectory, name);
         
