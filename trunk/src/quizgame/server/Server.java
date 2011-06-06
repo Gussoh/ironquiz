@@ -42,12 +42,10 @@ public class Server implements Thread.UncaughtExceptionHandler {
     private MainscreenModel mainscreenModel = new MainscreenModel(this);
     private GameModel gameModel = new DefaultGameModel(this);
     private ActiveBoard activeBoard = null;
-    private Server server;
     
     
     /** Creates a new instance of Server */
     public Server() {
-        server = this;
         try {
             connectionListener.createActiveServerSocket(8888);
             new Console(this);
@@ -88,10 +86,11 @@ public class Server implements Thread.UncaughtExceptionHandler {
     }
 
 
-    public void createWorker() {
+    private void createWorker() {
         new Thread(new Runnable() {
+            @Override
             public void run() {
-                Thread.currentThread().setUncaughtExceptionHandler(server);
+                Thread.currentThread().setUncaughtExceptionHandler(Server.this);
                 for(;;) {
                     jobSemaphore.acquireUninterruptibly();
                     Job job = jobQueue.poll();
@@ -130,6 +129,7 @@ public class Server implements Thread.UncaughtExceptionHandler {
         this.activeBoard = activeBoard;
     }
 
+    @Override
     public void uncaughtException(Thread t, Throwable e) {
         Logger.getInstance().println("Server: Worker-thread caused an uncaught exception. " + e);
         e.printStackTrace();

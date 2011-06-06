@@ -70,6 +70,9 @@ public class AdminModel {
             if(categories != null) {
                 server.setActiveBoard(new ActiveBoard(server, boardName, categories));
                 sendActiveBoard();
+            } else {
+                server.setActiveBoard(new ActiveBoard(server, null, null));
+                sendActiveBoard();
             }
             
             
@@ -169,10 +172,10 @@ public class AdminModel {
             Board message = new Board();
             message.name = ((GetBoard) packet).boardName;
             message.categories = server.getBoardManager().getBoard(message.name);
-            if(message.categories != null) {
-                clientHandler.send(message);
+            if(message.categories == null) { // TODO: does this work?
+                Logger.getInstance().println("Setting empty board");
             }
-            // Todo: send error packet if null.
+            clientHandler.send(message);
             
         } else if(packet instanceof SaveBoard)  {
             SaveBoard message = (SaveBoard) packet;
