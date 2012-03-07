@@ -26,6 +26,8 @@ import quizgame.common.Constants;
 public class Pulpit extends JFrame {
     /** Creates a new instance of Pulpit */
     
+    private static final int CLICK_TIME_OUT = 1000;
+    private long timeStampLastClick = 0;
     
     public Pulpit(final PulpitConnection pulpitConnection, final PulpitPanel pulpitPanel) {
         
@@ -37,14 +39,22 @@ public class Pulpit extends JFrame {
         
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_SPACE && !pulpitPanel.isLocked()) {
+                long now = System.currentTimeMillis();
+                if(e.getKeyCode() == KeyEvent.VK_SPACE && !pulpitPanel.isLocked() 
+                        && (now - timeStampLastClick) > CLICK_TIME_OUT) {
                     pulpitConnection.answer();
+                    timeStampLastClick = now;
                 }
             }
         });
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                pulpitConnection.answer();
+                long now = System.currentTimeMillis();
+                if(!pulpitPanel.isLocked() 
+                        && (now - timeStampLastClick) > CLICK_TIME_OUT) {
+                    pulpitConnection.answer();
+                    timeStampLastClick = now;
+                }
             }
         });
     }
