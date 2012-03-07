@@ -20,6 +20,7 @@ public class PulpitStatus implements PulpitPacket {
     private boolean alwaysLocked;
     private State state;
     private String nickname;
+    private boolean lastAnswerCorrect = false;
 
     public void setAlwaysLocked(boolean alwaysLocked) {
         this.alwaysLocked = alwaysLocked;
@@ -57,4 +58,16 @@ public class PulpitStatus implements PulpitPacket {
         this.nickname = name;
     }
 
+    public boolean isLastAnswerCorrect() {
+        return lastAnswerCorrect;
+    }
+
+    public void setLastAnswerCorrect(boolean lastAnswerCorrect) {
+        this.lastAnswerCorrect = lastAnswerCorrect;
+    }
+
+    @Override
+    public String toString() {
+        return "PulpitStatus{" + "score=" + score + ", alwaysLocked=" + alwaysLocked + ", state=" + state + ", nickname=" + nickname + ", lastAnswerCorrect=" + lastAnswerCorrect + '}';
+    }
 }
