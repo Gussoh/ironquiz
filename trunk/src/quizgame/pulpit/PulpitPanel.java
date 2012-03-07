@@ -25,8 +25,9 @@ public class PulpitPanel extends JPanel {
     private int namePosX;
     private int namePosY;
     private int scorePosY;
-    private Color lockColor = new Color(0, 0, 0, 127);
-    private Color answerColor = new Color(0, 255, 0, 127);
+    private final Color lockColor = new Color(0, 0, 0, 127);
+    private final Color answerColor = new Color(0, 255, 0, 127);
+    private final Color backgroundColor = new Color(151, 212, 255);
     private Font nameFont;
     private Font notEnabledFont;
     private Font scoreFont;
@@ -61,7 +62,7 @@ public class PulpitPanel extends JPanel {
         Graphics2D g = (Graphics2D) graphics;
         
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setPaint(new GradientPaint(0, 0, new Color(151, 212, 255), 0, getHeight(), Color.WHITE));
+        g.setPaint(new GradientPaint(0, 0, backgroundColor, 0, getHeight(), Color.WHITE));
         g.fillRect(0, 0, getWidth(), getHeight());
         
         switch(status.getState()) {
@@ -93,6 +94,12 @@ public class PulpitPanel extends JPanel {
             g.drawString(status.getNickname(), namePosX, namePosY);
             g.setFont(scoreFont);
             g.drawString("" + status.getScore(), (getWidth() - g.getFontMetrics().stringWidth("" + status.getScore())) / 2, scorePosY);
+            
+            if (status.isLastAnswerCorrect()) {
+                g.setColor(answerColor);
+                g.fillRect(getWidth() / 4, scorePosY + (getHeight() - scorePosY) / 4, getWidth() / 2, (getHeight() - scorePosY) / 2);
+            }
+
         } else {
             String text = "Waiting for response from server...";
 

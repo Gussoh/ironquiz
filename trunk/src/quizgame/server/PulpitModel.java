@@ -78,6 +78,11 @@ public class PulpitModel {
     public void judgePulpit(PulpitAccount pulpet, boolean wasCorrect) {
         int score = server.getActiveBoard().getActiveQuestion().score;
         pulpet.getPulpitStatus().addScore(wasCorrect ? score : -score);
+        if(wasCorrect) {
+            for (PulpitAccount elem : server.getUserManager().getPulpits().values()) {
+                elem.getPulpitStatus().setLastAnswerCorrect(elem == pulpet);
+            }
+        }
     }
     
     /**
@@ -128,6 +133,7 @@ public class PulpitModel {
         pulpitStatus.setNickname(pulpet.getName());
         pulpitStatus.setState(PulpitStatus.State.LOCKED);
         pulpitStatus.setScore(0);
+        pulpitStatus.setLastAnswerCorrect(false);
         pulpet.setPulpitStatus(pulpitStatus);
         clientHandler.send(pulpitStatus);
         server.getAdminModel().sendPulpitInformation();
