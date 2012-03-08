@@ -10,11 +10,15 @@
 package quizgame.server;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
 import quizgame.protocol.Authenticate;
 import quizgame.protocol.Logout;
 import quizgame.protocol.Packet;
+import quizgame.protocol.PulpitPing;
 import quizgame.protocol.admin.AdminPacket;
 import quizgame.protocol.admin.QuestionTimedOut;
 import quizgame.protocol.mainscreen.MainScreenPacket;
@@ -23,6 +27,7 @@ import quizgame.server.admin.AdminModel;
 import quizgame.server.game.DefaultGameModel;
 import quizgame.server.game.GameModel;
 import quizgame.server.typer.TyperModel;
+import quizgame.server.usertypes.PulpitAccount;
 
 /**
  *
@@ -111,6 +116,18 @@ public class Server implements Thread.UncaughtExceptionHandler {
                 }
             }
         }).start();
+        
+		// Ping all connected pulpits at a fixed rate
+        new Timer(true).scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                for(Map.Entry<ClientHandler, PulpitAccount> elem : 
+                        getUserManager().getPulpits().entrySet()) {
+					// Send to PulpitConnetion
+                    elem.getKey().send(new PulpitPing(elem.getValue().getName()));
+                }
+            }
+        }, PulpitPing.PING_INTERVAL, PulpitPing.PING_INTERVAL);
     }
 
     public AccountManager getUserManager() {

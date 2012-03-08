@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.swing.SwingUtilities;
 import quizgame.common.ClientConnection;
 import quizgame.protocol.Packet;
+import quizgame.protocol.PulpitPing;
 import quizgame.protocol.pulpit.AuthenticatePulpit;
 import quizgame.protocol.pulpit.PulpitAnswer;
 import quizgame.protocol.pulpit.PulpitStatus;
@@ -21,8 +22,10 @@ import quizgame.protocol.pulpit.PulpitStatus;
 public class PulpitConnection extends ClientConnection {
     private PulpitPanel pulpetPanel;
     
+    // Packet private
+    long lastPing = System.currentTimeMillis();
     /**
-     * Creates a new instance of MainScreenConnection
+     * Creates a new instance of PulpitConnection
      * @param serverHost address to the server to fetch remote objects from
      * @param username username to use when authenticating to the server
      * @param password password to use when authenticating to the server
@@ -37,6 +40,7 @@ public class PulpitConnection extends ClientConnection {
             writeObject(new PulpitAnswer());
         } catch(IOException ex) {
             // TODO This is a problem. Do something.
+            ex.printStackTrace();
         }
     }
     
@@ -48,6 +52,14 @@ public class PulpitConnection extends ClientConnection {
                     pulpetPanel.repaint();
                 }
             });
+        } else if(object instanceof PulpitPing) {
+            try {
+                lastPing = ((PulpitPing)object).getTimestamp();
+				// Respond to server (AdminModel)
+                writeObject(object);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
