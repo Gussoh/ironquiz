@@ -9,35 +9,12 @@ package quizgame.admin;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
 import quizgame.common.Category;
-import quizgame.protocol.LogMessage;
-import quizgame.protocol.admin.AdminMessage;
-import quizgame.protocol.admin.AuthenticateAdmin;
 import quizgame.common.ClientConnection;
+import quizgame.protocol.LogMessage;
 import quizgame.protocol.Packet;
-import quizgame.protocol.admin.DeactivateActiveQuestion;
-import quizgame.protocol.admin.GameTimerStatusChange;
-import quizgame.protocol.admin.JudgePulpit;
-import quizgame.protocol.admin.ModifyTimer;
-import quizgame.protocol.admin.PulpitAnswer;
-import quizgame.protocol.admin.PulpitInformation;
-import quizgame.protocol.admin.SetActiveQuestion;
-import quizgame.protocol.admin.SetPulpitNickname;
-import quizgame.protocol.admin.SetPulpitScore;
-import quizgame.protocol.admin.SetQuestionUsedUp;
-import quizgame.protocol.admin.SetTimerState;
-import quizgame.protocol.admin.StartGame;
-import quizgame.protocol.admin.StartGameNotify;
-import quizgame.protocol.admin.boardediting.Board;
-import quizgame.protocol.admin.boardediting.BoardAdded;
-import quizgame.protocol.admin.boardediting.BoardNames;
-import quizgame.protocol.admin.boardediting.BoardsRemoved;
-import quizgame.protocol.admin.boardediting.GetBoardNames;
-import quizgame.protocol.admin.boardediting.RemoveBoards;
-import quizgame.protocol.admin.boardediting.GetBoard;
-import quizgame.protocol.admin.boardediting.SaveBoard;
-import quizgame.protocol.admin.SetActiveBoard;
-import quizgame.protocol.admin.boardediting.SetBoardName;
-import quizgame.protocol.admin.boardediting.SetBoardNameByName;
+import quizgame.protocol.PulpitPing;
+import quizgame.protocol.admin.*;
+import quizgame.protocol.admin.boardediting.*;
 import quizgame.server.ActiveBoard;
 
 /**
@@ -163,6 +140,8 @@ public class AdminConnection extends ClientConnection {
                     admin.getActiveBoardPanel().setPulpitInfo(((PulpitInformation) object).getPulpets());
                 } else if(object instanceof PulpitAnswer) {
                     admin.getActiveBoardPanel().pulpetAnswer((PulpitAnswer) object);
+                } else if(object instanceof PulpitPing) {
+                    admin.getActiveBoardPanel().pulpitPing((PulpitPing)object);
                 }
                 
             }

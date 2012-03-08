@@ -7,6 +7,9 @@
 package quizgame.admin;
 
 import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.JLabel;
 import quizgame.protocol.pulpit.PulpitStatus;
 
 /**
@@ -15,6 +18,7 @@ import quizgame.protocol.pulpit.PulpitStatus;
  */
 public class PulpitInfoPanel extends javax.swing.JPanel {
     
+    public static final int PING_CHECK_INTERVAL = 500;
     private ActiveBoardPanel abp;
     private PulpitStatus pulpetStatus;
     private String name;
@@ -22,7 +26,7 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
     /**
      * Creates new form PulpitInfoPanel
      */
-    public PulpitInfoPanel(ActiveBoardPanel abp, String name, PulpitStatus pulpetStatus) {
+    public PulpitInfoPanel(final ActiveBoardPanel abp, final String name, PulpitStatus pulpetStatus) {
         this.abp = abp;
         this.name = name;
         this.pulpetStatus = pulpetStatus;
@@ -50,6 +54,14 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
                 stateLabel.setBackground(Color.BLUE);
                 break;
         }
+        new Timer(true).scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(pingLabel != null && abp != null && name != null) {
+                    pingLabel.setText(abp.secSinceLastPing(name));
+                }
+            }
+        }, PING_CHECK_INTERVAL+5000, PING_CHECK_INTERVAL); // Wait for GUI...
     }
     
     /** This method is called from within the constructor to
@@ -69,6 +81,7 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
         scoreTextField = new javax.swing.JTextField();
         stateLabel = new javax.swing.JLabel();
         updateButton = new javax.swing.JButton();
+        pingLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Name:");
 
@@ -94,6 +107,9 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
             }
         });
 
+        pingLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        pingLabel.setText("?");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +117,7 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(updateButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                    .add(updateButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel2)
@@ -110,10 +126,13 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
                             .add(jLabel4))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, scoreTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, nameLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                            .add(nickTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, stateLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, scoreTextField)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .add(nameLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(pingLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 18, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(nickTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, stateLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,7 +141,8 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel1)
-                    .add(nameLabel))
+                    .add(nameLabel)
+                    .add(pingLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
@@ -137,7 +157,7 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
                     .add(stateLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(updateButton)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,9 +178,13 @@ public class PulpitInfoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nickTextField;
+    private javax.swing.JLabel pingLabel;
     private javax.swing.JTextField scoreTextField;
     private javax.swing.JLabel stateLabel;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
     
+    public JLabel getPingLabel() {
+        return pingLabel;
+    }
 }

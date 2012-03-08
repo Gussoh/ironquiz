@@ -7,6 +7,7 @@
 package quizgame.admin;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ import quizgame.common.Entry;
 import quizgame.common.InGameQuestion;
 import quizgame.common.Question;
 import quizgame.protocol.admin.PulpitAnswer;
+import quizgame.protocol.PulpitPing;
 import quizgame.protocol.pulpit.PulpitStatus;
 import quizgame.server.ActiveBoard;
 
@@ -44,6 +46,12 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
     private int selectedCategoryIndex, selectedQuestionIndex;
     private JFrame frame;
     private int pulpitAnswerQuestionId = 0;
+    
+    /**
+     * Key: Account name of pulpit.
+     * Value: Timestamp of last received ping from pulpit.
+     */
+    private Map<String, Long> lastPingFromPulpit = new HashMap<String, Long>();
     
     private HashMap<JButton, Entry<Integer, Integer>> buttonToCategoryAndQuestionMap;
     
@@ -249,8 +257,19 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         validate();
     }
     
+    
+    // Perhaps this state should be kept at the server...
+    public void pulpitPing(PulpitPing ping) {
+        lastPingFromPulpit.put(ping.getPulpitAccountName(), System.currentTimeMillis());
+    }
+    
+    protected String secSinceLastPing(String name) {
+        return "" + (int)((System.currentTimeMillis()-lastPingFromPulpit.get(name))/1000);
+    }
+    
+    
     /**
-     * A puplet is answering, is it correct?
+     * A pulpit is answering, is it correct?
      */
     public void pulpetAnswer(PulpitAnswer answer) {
         pulpetAnswerInfoLabel.setText(answer.getName());

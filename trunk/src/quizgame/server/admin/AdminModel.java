@@ -35,6 +35,7 @@ import quizgame.protocol.admin.SetPulpitNickname;
 import quizgame.protocol.admin.boardediting.SetBoardNameByName;
 import quizgame.protocol.admin.SetQuestionUsedUp;
 import quizgame.protocol.admin.StartGame;
+import quizgame.protocol.PulpitPing;
 import quizgame.protocol.pulpit.PulpitStatus;
 import quizgame.server.ActiveBoard;
 import quizgame.server.ClientHandler;
@@ -188,6 +189,8 @@ public class AdminModel {
             names.boardNames = server.getBoardManager().getBoardNames();
             clientHandler.send(names);
             
+        } else if(packet instanceof PulpitPing) {
+            sendToAllAdmins((PulpitPing)packet);
         }
         
     }
