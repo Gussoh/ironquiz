@@ -1,0 +1,4 @@
+Illegal state crash in Admin
+Remember hostnames for client connections.
+Reconnect clients after time out
+Support for "The final question"
