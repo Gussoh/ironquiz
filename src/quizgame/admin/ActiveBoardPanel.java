@@ -207,6 +207,7 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
     
     private void activateQuestion(int categoryIndex, int questionIndex) {
         deactivateButton.setEnabled(true);
+        activateButton.setEnabled(false);
         activeQuestionQuestionLabel.setEnabled(true);
         activeQuestionAnswerLabel.setEnabled(true);
         activeQuestionPointsLabel.setEnabled(true);
@@ -219,6 +220,7 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
     
     private void deactivateQuestion() {
         deactivateButton.setEnabled(false);
+        activateButton.setEnabled(true);
         activeQuestionQuestionLabel.setEnabled(false);
         activeQuestionAnswerLabel.setEnabled(false);
         activeQuestionPointsLabel.setEnabled(false);
@@ -276,6 +278,7 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         pulpitAnswerCorrectButton.setEnabled(true);
         pulpitAnswerWrongButton.setEnabled(true);
         pulpitAnswerQuestionId = answer.getAnswerID();
+        deactivateButton.setEnabled(false);
     }
     
     public void showMessage(String text) {
@@ -702,10 +705,12 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
     }// </editor-fold>//GEN-END:initComponents
     
     private void pulpitAnswerWrongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pulpitAnswerWrongButtonActionPerformed
+        deactivateButton.setEnabled(true);
         adminConnection.judgePulpet(false, pulpitAnswerQuestionId);
     }//GEN-LAST:event_pulpitAnswerWrongButtonActionPerformed
     
     private void pulpitAnswerCorrectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pulpitAnswerCorrectButtonActionPerformed
+        deactivateButton.setEnabled(true);
         adminConnection.judgePulpet(true, pulpitAnswerQuestionId);
     }//GEN-LAST:event_pulpitAnswerCorrectButtonActionPerformed
     
