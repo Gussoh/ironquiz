@@ -49,6 +49,9 @@ public class DefaultGameModel implements GameModel {
         if(gameTimer.isRunning()) {
             clientHandler.send(new AdminMessage("Cannot de-activate question while the game timer is running."));
             return;
+        } else if(pulpitAnswering) {
+            clientHandler.send(new AdminMessage("Cannot de-activate question while a pulpit is answering."));
+            return;
         }
         
         if(server.getActiveBoard().deactivateQuestion()) {
