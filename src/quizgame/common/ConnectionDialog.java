@@ -49,6 +49,11 @@ public abstract class ConnectionDialog extends JDialog {
         if(application != null) {
             welcomeLabel.setText(welcomeLabel.getText() + " - " + application);
             setTitle(application + " - " + getTitle());
+            
+            serverAddressField.setText(ClientConfig.getInstance().getHostname());
+            if(serverAddressField.getText().isEmpty() == false) {
+                usernameField.requestFocus();
+            }
         }
         
         pack();
@@ -211,6 +216,7 @@ public abstract class ConnectionDialog extends JDialog {
     private void connectPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectPressed
         try {
             onConnect(serverAddressField.getText(), usernameField.getText(), new String(passwordField.getPassword()));
+            ClientConfig.getInstance().setHostname(serverAddressField.getText());
         } catch (MalformedURLException e) {
             showWarning("The hostname entered is invalid.");
         } catch (RemoteException e) {
