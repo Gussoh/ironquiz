@@ -7,30 +7,18 @@
 package quizgame.admin;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Timer;
-import java.util.TimerTask;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import quizgame.common.Category;
-import quizgame.common.Entry;
-import quizgame.common.InGameQuestion;
-import quizgame.common.Question;
-import quizgame.protocol.admin.PulpitAnswer;
+import javax.swing.*;
+import quizgame.common.*;
 import quizgame.protocol.PulpitPing;
+import quizgame.protocol.admin.PulpitAnswer;
 import quizgame.protocol.pulpit.PulpitStatus;
 import quizgame.server.ActiveBoard;
 
@@ -335,6 +323,10 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         pulpitsPanel = new javax.swing.JPanel();
+        playPanel = new javax.swing.JPanel();
+        playIntro = new javax.swing.JButton();
+        playTada = new javax.swing.JButton();
+        playSecond = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -390,9 +382,9 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                         .add(474, 474, 474))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
                         .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedPoints, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedAnswer, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedQuestionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedPoints, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedAnswer, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, selectedQuestionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(138, 138, 138)))
                 .addContainerGap())
         );
@@ -574,15 +566,11 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         messagePanel.setLayout(messagePanelLayout);
         messagePanelLayout.setHorizontalGroup(
             messagePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(messagePanelLayout.createSequentialGroup()
-                .add(messageScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
-                .addContainerGap())
+            .add(messageScroll)
         );
         messagePanelLayout.setVerticalGroup(
             messagePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(messagePanelLayout.createSequentialGroup()
-                .add(messageScroll)
-                .addContainerGap())
+            .add(messageScroll)
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Pulpit answer")));
@@ -615,9 +603,9 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                 .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel1Layout.createSequentialGroup()
-                        .add(pulpitAnswerCorrectButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(pulpitAnswerCorrectButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
                     .add(pulpetAnswerInfoLabel)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -626,7 +614,7 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                 .add(pulpetAnswerInfoLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, pulpitAnswerWrongButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, pulpitAnswerCorrectButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -637,7 +625,7 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
         questionsPanel.setLayout(questionsPanelLayout);
         questionsPanelLayout.setHorizontalGroup(
             questionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 681, Short.MAX_VALUE)
+            .add(0, 0, Short.MAX_VALUE)
         );
         questionsPanelLayout.setVerticalGroup(
             questionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -665,6 +653,52 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
 
         jScrollPane2.setViewportView(jScrollPane1);
 
+        playPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Play sounds"));
+
+        playIntro.setText("Intro");
+        playIntro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playIntroActionPerformed(evt);
+            }
+        });
+
+        playTada.setText("Tada");
+        playTada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playTadaActionPerformed(evt);
+            }
+        });
+
+        playSecond.setText("Second");
+        playSecond.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playSecondActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout playPanelLayout = new org.jdesktop.layout.GroupLayout(playPanel);
+        playPanel.setLayout(playPanelLayout);
+        playPanelLayout.setHorizontalGroup(
+            playPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(playPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(playPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(playIntro)
+                    .add(playTada)
+                    .add(playSecond))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        playPanelLayout.setVerticalGroup(
+            playPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(playPanelLayout.createSequentialGroup()
+                .add(playIntro)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(playTada)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(playSecond)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -675,13 +709,16 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                     .add(questionsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+                            .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(activeQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jScrollPane2, 0, 0, Short.MAX_VALUE)
-                            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .add(messagePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(playPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(messagePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -690,17 +727,18 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
                 .addContainerGap()
                 .add(questionsPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(activeQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(layout.createSequentialGroup()
-                        .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 101, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(markedQuestionPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(messagePanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(activeQuestionPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(playPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(messagePanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(5, 5, 5))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -743,6 +781,30 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
     private void selectedUsedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedUsedActionPerformed
         adminConnection.setQuestionUsedUp(selectedCategoryIndex, selectedQuestionIndex, selectedUsed.isSelected());
     }//GEN-LAST:event_selectedUsedActionPerformed
+   
+    private void playSecondActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playSecondActionPerformed
+        String sound = "sound/jeopardy_second_half.wav";
+        if (!SoundPlayer.getInstance().isLoaded(sound)) {
+            SoundPlayer.getInstance().loadSound(sound, sound);
+        }
+        SoundPlayer.getInstance().play(sound);
+    }//GEN-LAST:event_playSecondActionPerformed
+
+    private void playIntroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playIntroActionPerformed
+        String sound = "sound/jeopardy_intro.wav";
+        if (!SoundPlayer.getInstance().isLoaded(sound)) {
+            SoundPlayer.getInstance().loadSound(sound, sound);
+        }
+        SoundPlayer.getInstance().play(sound);
+    }//GEN-LAST:event_playIntroActionPerformed
+
+    private void playTadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playTadaActionPerformed
+        String sound = "sound/jeopardy_tada.wav";
+        if (!SoundPlayer.getInstance().isLoaded(sound)) {
+            SoundPlayer.getInstance().loadSound(sound, sound);
+        }
+        SoundPlayer.getInstance().play(sound);
+    }//GEN-LAST:event_playTadaActionPerformed
     
     /**
      * used by pulpetinfopanel to set new score
@@ -795,6 +857,10 @@ public class ActiveBoardPanel extends javax.swing.JPanel implements ActionListen
     private javax.swing.JScrollPane messageScroll;
     private javax.swing.JButton pauseButton;
     private javax.swing.JButton playButton;
+    private javax.swing.JButton playIntro;
+    private javax.swing.JPanel playPanel;
+    private javax.swing.JButton playSecond;
+    private javax.swing.JButton playTada;
     private javax.swing.JLabel pulpetAnswerInfoLabel;
     private javax.swing.JButton pulpitAnswerCorrectButton;
     private javax.swing.JButton pulpitAnswerWrongButton;

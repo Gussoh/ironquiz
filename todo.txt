@@ -1,7 +1,6 @@
 Reconnect clients after time out
 Support for "The final question"
 	- If negative score you don't get to play?
-Jeapordy intro music, button in the admin gui
 Power-ups
 	- Daily Double a.k.a. "dubbelchans"
 	- Music questions
