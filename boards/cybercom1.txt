@@ -1,0 +1,41 @@
+#Cybercom
+100; Cybercom i Göteborg ligger på denna holme    ; Lindholmen
+200; På denna våning i Cybercomhuset befinner vi oss    ; våning 6
+300; Så många olika bokstäver ingår i namnet "Cybercom"    ; 7
+400; Detta var året då Cybercom grundades    ; 1995
+500; Detta är Cybercoms motto    ; +1
+
+#Göteborg
+100; Denna svenska stad har fler invånare än Göteborg    ; Stockholm
+200; Denna stora personbilstillverkare huserar på Hisingen    ; Volvo
+300; Denna park har gröna kaniner    ; Liseberg
+400; Fiskhallen vid Rosenlundskanalen heter så    ; Feskekôrka
+500; Göteborg ligger vid dess mynning    ; Göta älv
+
+#Kungen
+100; Detta nummer har vår nuvarande regent    ; 16
+300; Detta heter den nyfödde prinsessan    ; Estelle
+200; Detta djur är skogens konung    ; älgen
+400; Detta är namnet på "kungen" som har ett par tofflor uppkallade efter sig    ; Peter "Foppa" Forsberg
+500; Kungen av pop dog detta år    ; 2009
+
+#Programmering
+100; Detta programmeringsspråk är också en typ av kaffe    ; Java
+200; Detta kända programmeringspråk delar sitt namn med en vitamin    ; C
+300; Detta returnerar count(array(1,2,3,4)) i PHP    ; 4
+400; Så många gånger kan du ändra en public static final String    ; 0
+500; Detta är namnet på den virtuella maskinen i Android    ; Dalvik
+
+#Svåra ord
+100; Pilk är ett exempel på sådant    ; Ett fiskeredskap
+200; Detta definierar ett palindrom    ; Ord eller mening som är densamma baklänges
+300; Är omnivorer    ; Allätare
+400; Är en gäldenär    ; skyldig pengar
+500; Speleolog gör detta    ; Grottforskar
+
+#Willy Wonka
+100; Namnet på boken där Willy Wonka är en av karraktärerna   
+200; Typ av företag som Willy Wonka äger    ; Chokladfabrik
+300; Författaren som skrev boken "Kalle och Chokladfabriken", utgiven 1964    ; Roald Dahl
+400; Spelade Willy Wonka i filmen från 2005    ; Johnny Depp
+500; Så heter de små fabriksarbetarna i boken    ; Oompa Loompier
