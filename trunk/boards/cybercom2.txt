@@ -1,0 +1,41 @@
+#Monthy Python
+200; Namnet säger att Monthy Pythons cirkus gjorde detta ; Den flög
+400; Detta djur är Wanda i filmen med många av medlemarna ; En fisk
+600; John Cleese rollfigur i Fawlty Towers hette så ; Basil
+800; Detta epitet hade Sir Lancelot i the Holy Grail    ; The brave
+1000; Denne medlem har ett namn som får mig att tänka på processorer, motorer och IRC ; Eric Idle
+
+#Århundraden
+200; Detta århundrade var det för 10 år sedan ; 2000-talet
+400; Detta århundrade byggdes Frihetsgudinnan samt Eiffeltornet    ; 1886 resp 1889
+600; Detta århundrade grundades Chalmers    ; 1829
+800; Detta århundrade härjade spanska sjukan    ; Strax efter första världskriget 1918-1920
+1000; Detta århundrade skedde Karl Xs berömda march över lilla och stora bält ; 1658
+
+#Arnold
+200; Se heter den kände kroppsbyggaren, skådespelaren och politikern i efternamn    ; Schwarzenegger
+400; Skådespelaren kommer ursprungligen från detta land ; Österrike
+600; Namnet på filmen där han spelar en robot    ; The Terminator / The Terminator II
+800; Detta parti företräder Arnold    ; Republican Party
+1000; I filmen predator använder Blain Cooper detta snurrande vapen ; Minigun
+
+#Segling
+200; Detta kallas de tyger man spänner upp för att driva en båt frammåt ; Segel
+400; Så heter den vänstra sidan på en båt ; Babord
+600; På styrbord sida lyser lanternan i denna färg ; Grön
+800; För att slippa regn spänner man vanligtvis upp detta ; Kapell
+1000; Så heter den aktre masten ; Mesanmast
+
+#Baywatch
+200; Så hette David Hasselhoffs rollfigur ; Mitch Buchannon
+400; Hasselhoff sjöng senare att han letade efter detta i sin kända hit-singel  ; Freedom
+600; Denna skådespelare spelar även huvudrollen i filmen Barb Wire från 1996 ; Pamela Anderson
+800; Denna världsdel är den enda som inte har visat Baywatch ; Antarktis
+1000; Serien flyttade senare till denna amerikanska stat ; Hawaii
+
+#Pojkband
+200; Så heter bandet med hitlåten "I want it that way" ; Backstreet Boys
+400; Detta mycket kända Irländska pojkband och har en hitlåt som heter "World of our own" ; Westlife
+600; Robbie Williams var tidigare medlem i detta kända pojkband ; Take That
+800; Så heter medlemen i Boyzone som senare har lyckad solokarriär ; Ronan Keating
+1000; Tjejbandet Timoteij ställer i årets melodifestival upp med denna låt ; Stormande Hav
