@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<project name="ironquiz" default="compile" basedir=".">
+
+	<property name="lib" location="lib"/>
+	<property name="lib.swing" location="${lib}/swing-layout-1.0.1.jar" relative="true"/>
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="build.classes" location="${build}/classes"/>
+	<property name="release"  location="release"/>
+	<property name="release.admin" location="${release}/admin"/>
+	<property name="release.mainscreen" location="${release}/mainscreen"/>
+	<property name="release.pulpit" location="${release}/pulpit"/>
+	<property name="release.server" location="${release}/server"/>
+	
+	<path id="master-classpath">
+		<fileset dir="${lib}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="clean"/>
+	<target name="jar" depends="release"/>
+	
+	<target name="prepare-compile">
+		<delete dir="${build}"/>
+		<mkdir dir="${build.classes}"/>
+	</target>
+	
+	<target name="compile" depends="prepare-compile">
+		<javac
+			srcdir="${src}"
+			destdir="${build.classes}"
+			includeantruntime="false">
+				<classpath refid="master-classpath"/>
+		</javac>
+	</target>
+	
+	<target name="prepare-release" depends="compile">
+		<delete dir="${release}"/>
+		<mkdir dir="${release.admin}"/>
+		<copy todir="${release.admin}/">
+			<fileset dir=".">
+				<include name="${lib.swing}"/>
+			</fileset>
+		</copy>
+		
+		<mkdir dir="${release.mainscreen}"/>
+		<copy todir="${release.mainscreen}/">
+			<fileset dir=".">
+				<include name="${lib.swing}"/>
+				<include name="img/**"/>
+				<include name="sound/**"/>
+			</fileset>
+		</copy>
+		
+		<mkdir dir="${release.pulpit}"/>
+		<copy todir="${release.pulpit}/">
+			<fileset dir=".">
+				<include name="${lib.swing}"/>
+			</fileset>
+		</copy>
+		
+		<mkdir dir="${release.server}"/>
+		<copy todir="${release.server}/">
+			<fileset dir=".">
+				<include name="boards/**"/>
+				<include name="${lib.swing}"/>
+				<include name="accounts.ini"/>
+				<include name="config.ini"/>
+			</fileset>
+		</copy>
+		<echo file="${release.server}/_RUN_SERVER.BAT">@echo off${line.separator}call java -jar *.jar${line.separator}pause</echo>
+	</target>
+	
+	<target name="release" depends="prepare-release">
+		<jar destfile="${release.admin}/admin.jar">
+			<fileset dir="${build.classes}" includes="**/*.class"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.swing}"/>
+				<attribute name="Main-Class" value="quizgame.admin.Admin"/>
+			</manifest>
+        </jar>
+		<jar destfile="${release.mainscreen}/mainscreen.jar">
+			<fileset dir="${build.classes}" includes="**/*.class"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.swing}"/>
+				<attribute name="Main-Class" value="quizgame.mainscreen.MainScreen"/>
+			</manifest>
+        </jar>
+		<jar destfile="${release.pulpit}/pulpit.jar">
+			<fileset dir="${build.classes}" includes="**/*.class"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.swing}"/>
+				<attribute name="Main-Class" value="quizgame.pulpit.Pulpit"/>
+			</manifest>
+        </jar>
+		<jar destfile="${release.server}/server.jar">
+			<fileset dir="${build.classes}" includes="**/*.class"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.swing}"/>
+				<attribute name="Main-Class" value="quizgame.server.Server"/>
+			</manifest>
+        </jar>
+    </target>
+</project>
